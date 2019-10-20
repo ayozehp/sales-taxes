@@ -15,4 +15,16 @@ final class Tax
     {
         return $this->tax;
     }
+
+    public function equals(Tax $anTax): bool
+    {
+        return self::tax() === $anTax->tax;
+    }
+
+    public function add(Tax $anTax): self
+    {
+        $newTaxPercent = $this->tax() + $anTax->tax();
+
+        return new Tax($newTaxPercent);
+    }
 }
