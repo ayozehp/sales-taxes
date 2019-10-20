@@ -19,5 +19,4 @@ final class TaxFactory
     {
         return new Tax(5.0);
     }
-
 }
