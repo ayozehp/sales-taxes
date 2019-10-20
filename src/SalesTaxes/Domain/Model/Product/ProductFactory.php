@@ -15,4 +15,14 @@ final class ProductFactory
     {
         return new Product($name, $price, TaxFactory::create0Percent(), false);
     }
+
+    public static function createProductWithTaxAndImported(string $name, float $price)
+    {
+        return new Product($name, $price, TaxFactory::create10Percent(), true);
+    }
+
+    public static function createProductWithoutTaxAndImported(string $name, float $price)
+    {
+        return new Product($name, $price, TaxFactory::create0Percent(), true);
+    }
 }

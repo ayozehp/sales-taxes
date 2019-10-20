@@ -29,4 +29,15 @@ final class TaxFactoryTest extends TestCase
         $this->assertInstanceOf(Tax::class, $expectedTax);
         $this->assertEquals($expectedTax->tax(), $tax->tax());
     }
+
+    /** @test */
+    public function itShouldReturnATaxWithImportedTax()
+    {
+        $tax = new Tax(0.5);
+
+        $expectedTax = TaxFactory::createImportedTax();
+
+        $this->assertInstanceOf(Tax::class, $expectedTax);
+        $this->assertEquals($expectedTax->tax(), $tax->tax());
+    }
 }

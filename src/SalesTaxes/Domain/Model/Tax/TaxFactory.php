@@ -14,4 +14,10 @@ final class TaxFactory
     {
         return new Tax(0);
     }
+
+    public static function createImportedTax(): Tax
+    {
+        return new Tax(0.5);
+    }
+
 }

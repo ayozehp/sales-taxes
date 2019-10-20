@@ -3,8 +3,9 @@
 namespace App\SalesTaxes\Domain\Model\Product;
 
 use App\SalesTaxes\Domain\Model\Tax\Tax;
+use App\SalesTaxes\Domain\Model\Tax\TaxFactory;
 
-class Product
+final class Product
 {
     private $name;
     private $price;
@@ -17,6 +18,10 @@ class Product
         $this->price = $price;
         $this->tax = $tax;
         $this->imported = $imported;
+
+        if ($this->imported) {
+            $this->tax = $tax->add(TaxFactory::createImportedTax());
+        }
     }
 
     public function name(): string

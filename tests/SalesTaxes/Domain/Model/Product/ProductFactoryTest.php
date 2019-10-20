@@ -39,4 +39,36 @@ final class ProductFactoryTest extends TestCase
         $this->assertTrue($tax->equals($product->tax()));
         $this->assertEquals($imported, $product->imported());
     }
+
+    /** @test */
+    public function itShouldReturnAProductWithTaxAndImported()
+    {
+        $name = 'imported bottle of perfume';
+        $price = 47.50;
+        $tax = (TaxFactory::create10Percent())->add(TaxFactory::createImportedTax());
+        $imported = true;
+
+        $product = ProductFactory::createProductWithTaxAndImported($name, $price);
+
+        $this->assertEquals($name, $product->name());
+        $this->assertEquals($price, $product->price());
+        $this->assertTrue($tax->equals($product->tax()));
+        $this->assertEquals($imported, $product->imported());
+    }
+
+    /** @test */
+    public function itShouldReturnAProductWithoutTaxAndImported()
+    {
+        $name = 'imported box of chocolates';
+        $price = 10.0;
+        $tax = (TaxFactory::create0Percent())->add(TaxFactory::createImportedTax());
+        $imported = true;
+
+        $product = ProductFactory::createProductWithoutTaxAndImported($name, $price);
+
+        $this->assertEquals($name, $product->name());
+        $this->assertEquals($price, $product->price());
+        $this->assertTrue($tax->equals($product->tax()));
+        $this->assertEquals($imported, $product->imported());
+    }
 }
