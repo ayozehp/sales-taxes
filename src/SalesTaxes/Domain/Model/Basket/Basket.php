@@ -24,7 +24,7 @@ final class Basket
         return $this->products;
     }
 
-    public function totalTax()
+    public function totalTax(): float
     {
         $products = $this->products;
         $totalTax = 0;
