@@ -43,4 +43,10 @@ final class Product
     {
         return $this->imported;
     }
+
+    public function totalTax(): float
+    {
+        $taxPercent = $this->tax->tax() / 100;
+        return round($this->price * $taxPercent, 2);
+    }
 }
