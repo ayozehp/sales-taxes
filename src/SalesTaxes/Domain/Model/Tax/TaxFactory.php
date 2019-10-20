@@ -17,7 +17,7 @@ final class TaxFactory
 
     public static function createImportedTax(): Tax
     {
-        return new Tax(0.5);
+        return new Tax(5.0);
     }
 
 }

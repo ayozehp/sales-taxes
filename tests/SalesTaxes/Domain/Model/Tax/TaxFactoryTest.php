@@ -33,7 +33,7 @@ final class TaxFactoryTest extends TestCase
     /** @test */
     public function itShouldReturnATaxWithImportedTax()
     {
-        $tax = new Tax(0.5);
+        $tax = new Tax(5);
 
         $expectedTax = TaxFactory::createImportedTax();
 
