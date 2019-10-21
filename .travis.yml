@@ -1,0 +1,12 @@
+language: php
+sudo: false
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install
+  - cp .env .env.local
+
+script:
+  - vendor/bin/phpunit
