@@ -42,10 +42,6 @@ final class Product
 
     public function totalTax(): float
     {
-        if (0.0 === $this->tax->tax() && !$this->imported()) {
-            return 0.0;
-        }
-
         $priceTax = 0.0;
         if (0.0 !== $this->tax->tax()) {
             $priceTax = ($this->tax->tax() * $this->price()) / 100;
