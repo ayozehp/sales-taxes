@@ -44,17 +44,22 @@ final class Product
     {
         $priceTax = 0.0;
         if (0.0 !== $this->tax->tax()) {
-            $priceTax = ($this->tax->tax() * $this->price()) / 100;
+            $priceTax = $this->calculateTax($this->price(), $this->tax()->tax());
         }
 
         $importedTax = 0.0;
         if ($this->imported()) {
-            $importedTax = TaxFactory::createImportedTax()->tax() * $this->price() / 100;
+            $importedTax = $this->calculateTax($this->price(), TaxFactory::createImportedTax()->tax());
         }
 
         $totalTax = floor(($priceTax + $importedTax) * 100) / 100;
 
         return $this->roundUpToNearestZeroPointZeroFive($totalTax);
+    }
+
+    private function calculateTax(float $price, int $tax): float
+    {
+        return ($tax * $price) / 100;
     }
 
     private function roundUpToNearestZeroPointZeroFive(float $anFloat): float
