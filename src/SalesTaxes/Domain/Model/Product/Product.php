@@ -18,10 +18,6 @@ final class Product
         $this->price = $price;
         $this->tax = $tax;
         $this->imported = $imported;
-
-        if ($this->imported) {
-            $this->tax = $tax->add(TaxFactory::createImportedTax());
-        }
     }
 
     public function name(): string
@@ -46,10 +42,28 @@ final class Product
 
     public function totalTax(): float
     {
-        $taxPercent = $this->tax->tax() / 100;
-        $totalTax = round($this->price * $taxPercent, 2);
+        if (0.0 === $this->tax->tax() && !$this->imported()) {
+            return 0.0;
+        }
 
-        return $totalTax;
+        $priceTax = 0.0;
+        if (0.0 !== $this->tax->tax()) {
+            $priceTax = ($this->tax->tax() * $this->price()) / 100;
+        }
+
+        $importedTax = 0.0;
+        if ($this->imported()) {
+            $importedTax = TaxFactory::createImportedTax()->tax() * $this->price() / 100;
+        }
+
+        $totalTax = floor(($priceTax + $importedTax) * 100) / 100;
+
+        return $this->roundUpToNearestZeroPointZeroFive($totalTax);
+    }
+
+    private function roundUpToNearestZeroPointZeroFive(float $anFloat): float
+    {
+        return (ceil($anFloat / 0.05)) * 0.05;
     }
 
     public function total(): float

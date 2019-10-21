@@ -45,7 +45,7 @@ final class ProductFactoryTest extends TestCase
     {
         $name = 'imported bottle of perfume';
         $price = 47.50;
-        $tax = (TaxFactory::create10Percent())->add(TaxFactory::createImportedTax());
+        $tax = TaxFactory::create10Percent();
         $imported = true;
 
         $product = ProductFactory::createProductWithTaxAndImported($name, $price);
@@ -61,7 +61,7 @@ final class ProductFactoryTest extends TestCase
     {
         $name = 'imported box of chocolates';
         $price = 10.0;
-        $tax = (TaxFactory::create0Percent())->add(TaxFactory::createImportedTax());
+        $tax = TaxFactory::create0Percent();
         $imported = true;
 
         $product = ProductFactory::createProductWithoutTaxAndImported($name, $price);
