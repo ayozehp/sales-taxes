@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/ayozehp/sales-taxes.svg)](https://travis-ci.org/ayozehp/sales-taxes)
 
 # Sales Taxes
 
