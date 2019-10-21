@@ -20,7 +20,11 @@ final class BasketTest extends TestCase
 
         $expectedTotalTax = 1.50;
         $expectedTotal = 29.83;
+        $products = $basket->products();
 
+        $this->assertEquals(12.49, $products[0]->total());
+        $this->assertEquals(16.49, $products[1]->total());
+        $this->assertEquals(0.85, $products[2]->total());
         $this->assertEquals($expectedTotalTax, $basket->totalTax());
         $this->assertEquals($expectedTotal, $basket->total());
     }
@@ -42,7 +46,10 @@ final class BasketTest extends TestCase
 
         $expectedTotalTax = 7.65;
         $expectedTotal = 65.15;
+        $products = $basket->products();
 
+        $this->assertEquals(10.50, $products[0]->total());
+        $this->assertEquals(54.65, $products[1]->total());
         $this->assertEquals($expectedTotalTax, $basket->totalTax());
         $this->assertEquals($expectedTotal, $basket->total());
     }
@@ -69,7 +76,12 @@ final class BasketTest extends TestCase
 
         $expectedTotalTax = 6.70;
         $expectedTotal = 74.68;
+        $products = $basket->products();
 
+        $this->assertEquals(32.19, $products[0]->total());
+        $this->assertEquals(20.89, $products[1]->total());
+        $this->assertEquals(9.75, $products[2]->total());
+        $this->assertEquals(11.85, $products[3]->total());
         $this->assertEquals($expectedTotalTax, $basket->totalTax());
         $this->assertEquals($expectedTotal, $basket->total());
     }
